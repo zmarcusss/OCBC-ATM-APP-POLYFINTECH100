@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.a17019181.c300_ocbcmobile">
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key"></meta-data>
+
         <activity
             android:name=".Login"
             android:theme="@style/loginTheme">
@@ -18,9 +26,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Home"
-            android:label="Home"
-            ></activity>
+        <activity
+            android:name=".Home"
+            android:label="Home" />
+        <activity android:name=".AtmLocations"></activity>
     </application>
 
 </manifest>
