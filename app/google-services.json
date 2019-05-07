@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "716903686326",
+    "firebase_url": "https://c300-ab337.firebaseio.com",
+    "project_id": "c300-ab337",
+    "storage_bucket": "c300-ab337.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:716903686326:android:dfa8500334d26124",
+        "android_client_info": {
+          "package_name": "com.example.a17019181.c300_ocbcmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "716903686326-6kqrg67chst6kevq9btuqhs082q0ls43.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.a17019181.c300_ocbcmobile",
+            "certificate_hash": "afbe18e0c39d8c93877e5117883e59fc9524c4e1"
+          }
+        },
+        {
+          "client_id": "716903686326-9bcr8266v8mvjo20mms3rhjgrrsqk6nc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwX2_oWI79CoFWfMlhSi4W4_mT1GheMD4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "716903686326-9bcr8266v8mvjo20mms3rhjgrrsqk6nc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
