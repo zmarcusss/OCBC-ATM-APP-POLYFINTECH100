@@ -1,29 +1,39 @@
 package com.example.a17019181.c300_ocbcmobile;
 
-import android.app.Activity;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentActivity;
+import androidx.core.content.ContextCompat;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.CameraUpdate;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +45,7 @@ import java.util.Map;
 public class AtmLocations extends FragmentActivity implements OnMapReadyCallback {
     private TextView mTextViewResult;
     private RequestQueue mQueue;
-
+    private  SupportMapFragment mapFragment;
 
     GoogleMap map;
 
@@ -43,6 +53,8 @@ public class AtmLocations extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.atm_locations_activitiy);
+
+
 
         mTextViewResult = findViewById(R.id.text_view_result);
         mTextViewResult.setMovementMethod(new ScrollingMovementMethod());
@@ -59,17 +71,64 @@ public class AtmLocations extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION};
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+
+            Toast.makeText(this, "NO PERMISION", Toast.LENGTH_SHORT).show();
+            ActivityCompat.requestPermissions(this, permissions, 1);
+
+
+
+
+        }else{
+
+            initMap();
+        }
+
 
     }
 
+    private void initMap(){
+        getDeviceLocation();
+       mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
 
 
+    private void getDeviceLocation(){
 
-    public void requestWithSomeHttpHeaders() {
+
+        try {
+
+            final Task location = LocationServices.getFusedLocationProviderClient(this).getLastLocation();
+            location.addOnCompleteListener(new OnCompleteListener() {
+                @Override
+                public void onComplete(@NonNull Task task) {
+                    if (task.isSuccessful()) {
+                        Location currentLocation = (Location) task.getResult();
+                        LatLng location = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f));
+                        map.addMarker(new MarkerOptions().position(location));
+
+
+                    } else {
+                        Toast.makeText(AtmLocations.this, "unable to get current location", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }catch(SecurityException e){
+
+        }
+    }
+
+    private void requestWithSomeHttpHeaders() {
         mQueue= Volley.newRequestQueue(this);
         String url = "https://api.ocbc.com:8243/atm_locator/1.1";
         StringRequest getRequest = new StringRequest(Request.Method.GET, url,
@@ -96,8 +155,24 @@ public class AtmLocations extends FragmentActivity implements OnMapReadyCallback
                                 double lng = Double.parseDouble(longitude);
 
 
-                                LatLng marker = new LatLng(lat,lng);
-                                map.addMarker(new MarkerOptions().position(marker).title("ATM"));
+
+                                LatLng location = new LatLng(lat,lng);
+//                                map.addMarker(new MarkerOptions().position(location).title("ATM"));
+
+
+
+                                BitmapDrawable bitmapIcon=(BitmapDrawable)getResources().getDrawable(R.drawable.atm);
+                                Bitmap b = bitmapIcon.getBitmap();
+                                Bitmap customMarker = Bitmap.createScaledBitmap(b, 100, 100, false);
+
+
+                                MarkerOptions marker = new MarkerOptions()
+                                        .position(location)
+                                        .icon(BitmapDescriptorFactory.fromBitmap(customMarker))
+                                        .title("Atm")
+                                        ;
+
+                                map.addMarker(marker);
                             }
 
                         } catch(JSONException e){
@@ -134,4 +209,10 @@ public class AtmLocations extends FragmentActivity implements OnMapReadyCallback
 
 
     }
+
+
+
+
+
 }
+
