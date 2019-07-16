@@ -9,6 +9,8 @@ import com.google.cloud.dialogflow.v2beta1.QueryInput;
 import com.google.cloud.dialogflow.v2beta1.SessionName;
 import com.google.cloud.dialogflow.v2beta1.SessionsClient;
 
+//Done By: Jasper Tay Jie Wei (17020202)
+
 
 public class RequestJavaV2Task extends AsyncTask<Void, Void, DetectIntentResponse> {
 

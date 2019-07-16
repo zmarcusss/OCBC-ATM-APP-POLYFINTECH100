@@ -29,6 +29,8 @@ import com.google.gson.Gson;
 import com.google.zxing.Result;
 
 
+//Done By: Marcus Chen ZiRui (17019181)
+
 public class QR extends AppCompatActivity implements ZXingScannerView.ResultHandler {
 
     private ZXingScannerView qrScan;

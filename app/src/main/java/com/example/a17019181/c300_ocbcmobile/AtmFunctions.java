@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
+//Done By: Marcus Chen ZiRui (17019181)
 public class AtmFunctions extends AppCompatActivity {
 
     private EditText mWithdrawal;

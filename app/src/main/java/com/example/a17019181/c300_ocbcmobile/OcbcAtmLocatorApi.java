@@ -18,6 +18,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+//Done By: Jasper Tay Jie Wei (17020202)
+
 public class OcbcAtmLocatorApi {
 
     final String logTag = "OcbcAtmLocatorApi-";

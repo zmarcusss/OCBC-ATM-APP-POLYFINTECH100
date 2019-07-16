@@ -49,18 +49,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+//Done By: Jasper Tay Jie Wei (17020202)
+
 public class Chatbot extends Activity {
 
-    /**
-     * REFERENCES:
-     * ==================================================================================
-     * https://medium.com/@abhi007tyagi/android-chatbot-with-dialogflow-8c0dcc8d8018
-     * https://github.com/dialogflow/dialogflow-java-client-v2
-     * https://developers.google.com/api-client-library/java/apis/dialogflow/v2
-     * https://dialogflow.com/docs/sdks
-     * https://dialogflow.com/docs/samples
-     * ==================================================================================
-     */
+
 
     private static final String TAG = Chatbot.class.getSimpleName();
     private static final int USER = 10001;

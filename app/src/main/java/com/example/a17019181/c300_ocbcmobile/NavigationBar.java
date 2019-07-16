@@ -30,6 +30,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+
+//Done By: Marcus Chen ZiRui (17019181)
+
+
 public class NavigationBar extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

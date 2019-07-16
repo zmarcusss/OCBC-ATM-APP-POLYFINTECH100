@@ -13,6 +13,8 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 
+//Done By: Jasper Tay Jie Wei (17020202)
+
 public class GpsTracker extends Service implements LocationListener {
 
     private final Context mContext;

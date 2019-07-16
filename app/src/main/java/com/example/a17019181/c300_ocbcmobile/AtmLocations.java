@@ -42,6 +42,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+//Done By: Marcus Chen ZiRui (17019181)
+
 public class AtmLocations extends FragmentActivity implements OnMapReadyCallback {
     private TextView mTextViewResult;
     private RequestQueue mQueue;
