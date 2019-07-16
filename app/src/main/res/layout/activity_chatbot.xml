@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:paddingTop="4dp"
-            app:srcCompat="@drawable/chatbot_send_btn" />
+            android:src="@drawable/chatbot_send_btn"
+            android:layout_alignParentRight="true" />
 
         <EditText
             android:id="@+id/queryEditText"
@@ -34,7 +35,9 @@
             android:imeOptions="actionSend"
             android:inputType="text"
             android:paddingTop="4dp"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/sendBtn" />
 
 
     </RelativeLayout>
@@ -71,7 +74,9 @@
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/bot_bg_bubble"
                 android:gravity="start|center_vertical"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="16dp">
 
                 <TextView
                     android:id="@+id/botMsgWelcomeContent"
