@@ -73,7 +73,9 @@
         android:layout_height="wrap_content"
         android:text="$10"
         android:layout_weight="1"
-        />
+        android:textColor="#FFFFFF"
+        android:background="#fd2b3c"
+android:layout_marginRight="20dp"        />
 
 
 
@@ -83,6 +85,8 @@
         android:layout_height="wrap_content"
         android:text="$50"
         android:layout_weight="1"
+        android:textColor="#FFFFFF"
+        android:background="#fd2b3c"
 
         />
 
@@ -93,6 +97,9 @@
         android:layout_height="wrap_content"
         android:text="$100"
         android:layout_weight="1"
+        android:textColor="#FFFFFF"
+        android:background="#fd2b3c"
+        android:layout_marginLeft="20dp"
         />
 
 </LinearLayout>
@@ -101,7 +108,9 @@
         android:id="@+id/reset"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="Reset"/>
+        android:text="Reset"
+        android:visibility="invisible"
+        />
 
 
 
