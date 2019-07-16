@@ -1,8 +1,11 @@
 package com.example.a17019181.c300_ocbcmobile;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -17,7 +20,12 @@ public class AtmFunctions extends AppCompatActivity {
     private EditText mWithdrawal;
     private TextView mAmount;
     private Button withdrawBtn;
-    private Button otherFunctionBtn;
+    private Button tenBtn;
+    private Button fiftyBtn;
+    private Button hundredBtn;
+    private Button resetBtn;
+    private int value = 0;
+
 
     private String balance;
 
@@ -29,7 +37,38 @@ public class AtmFunctions extends AppCompatActivity {
         mWithdrawal = findViewById(R.id.withdrawalAmount);
         mAmount = findViewById(R.id.amountLeft);
         withdrawBtn = findViewById(R.id.withdrawBtn);
-        otherFunctionBtn = findViewById(R.id.otherFunction);
+
+        tenBtn = findViewById(R.id.tenDollar);
+        fiftyBtn = findViewById(R.id.fiftyDollar);
+        hundredBtn = findViewById(R.id.hundredDollar);
+        resetBtn = findViewById((R.id.reset));
+
+        tenBtn.setOnClickListener((View v) -> {
+
+            value += 10;
+            mWithdrawal.setText("" + value);
+        });
+
+        fiftyBtn.setOnClickListener((View v) -> {
+
+            value += 50;
+            mWithdrawal.setText("" + value);
+        });
+
+        hundredBtn.setOnClickListener((View v) -> {
+
+            value += 100;
+            mWithdrawal.setText("" + value);
+        });
+
+
+        resetBtn.setOnClickListener((View v) -> {
+
+            value = 0;
+            mWithdrawal.setText("" + value);
+
+        });
+
 
         Intent intent = getIntent();
         balance = intent.getStringExtra("balance");
@@ -43,16 +82,6 @@ public class AtmFunctions extends AppCompatActivity {
                 withdraw();
             }
         }));
-
-        otherFunctionBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                otherFunction();
-
-
-            }
-        });
 
 
     }
@@ -77,8 +106,17 @@ public class AtmFunctions extends AppCompatActivity {
                 mWithdrawal.setError("You do not have enough balance");
                 valid = false;
             } else {
-                mWithdrawal.setError(null);
 
+                if (Double.parseDouble(field)%10 != 0) {
+                    valid = false;
+                    mWithdrawal.setError("Only in denominations of $10");
+                }else if(Double.parseDouble(field)==0){
+                    valid = false;
+                    mWithdrawal.setError("Please enter an amount");
+                }
+                else {
+                    mWithdrawal.setError(null);
+                }
             }
         } catch (NumberFormatException e) {
             //not a double
@@ -98,19 +136,34 @@ public class AtmFunctions extends AppCompatActivity {
         }
 
 
-        Intent intent = new Intent(this, QR.class);
+        final Intent intent = new Intent(this, QR.class);
 
         intent.putExtra("preconfigure", mWithdrawal.getText().toString());
 
-        startActivity(intent);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Withdraw money")
+                .setMessage("Do you want to withdraw now?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("Set for later", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        SharedPreferences mPrefs = getSharedPreferences("preconfigure_id", 0);
+                        SharedPreferences.Editor editor = mPrefs.edit();
+                        editor.putString("key", mWithdrawal.getText().toString());
+                        editor.commit();
+
+                        finish();
+                    }
+                })
+                .show();
 
 
     }
 
-    private void otherFunction(){
-
-        Intent intent = new Intent(this, QR.class);
-        startActivity(intent);
-    }
 
 }

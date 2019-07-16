@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">C300_OCBCMobile</string>
+    <string name="app_name">OCBC</string>
     <string name="title_activity_navbar">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,4 +7,26 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+
+
+
+        <string name="welcome_msg">Welcome to your Banking Assistant</string>
+        <string name="info_msg">Ask me a question to begin!</string>
+
+        <string name="welcome_msg_bot">Hi! I am happy to assist you.\nFind out more about our key features:</string>
+
+        <string name="tv1">Seamless ATM Authentication</string>
+        <string name="tv2">Remote withdraw configuration</string>
+        <string name="tv3">ATM locator</string>
+
+        <string name="btnSelection">Tap Here</string>
+
+        <string name="bot_name">Bot</string>
+        <string name="user_name">You</string>
+
+        <string name="queryHint">Enter message</string>
+
+
+
 </resources>

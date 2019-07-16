@@ -19,6 +19,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AtmFunctions" />
         <activity android:name=".QR" />
+        <activity android:name=".Chatbot"
+            android:theme="@style/chatbot"
+
+            />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

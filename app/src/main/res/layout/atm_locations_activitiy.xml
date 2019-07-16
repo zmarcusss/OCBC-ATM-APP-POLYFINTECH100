@@ -30,6 +30,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="51dp"
-        android:text="Parse" />
+        android:text="Get Atm Locations" />
 
 </RelativeLayout>

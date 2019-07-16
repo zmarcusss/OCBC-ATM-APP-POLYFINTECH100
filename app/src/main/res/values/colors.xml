@@ -4,4 +4,13 @@
     <color name="colorPrimaryDark">#fd2b3c</color>
     <color name="colorAccent">#D81B60</color>
     <color name="red">#fd2b3c</color>
+
+
+
+    <color name="colorBot">#bdbdbd</color>
+    <color name="colorBlack">#000000</color>
+
+    <color name="colorRed">#FF0000</color>
+    <color name="colorWhite">#FFFFFF</color>
+
 </resources>

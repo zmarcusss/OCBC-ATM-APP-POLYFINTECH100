@@ -35,6 +35,10 @@
         android:layout_height="wrap_content"
       android:layout_gravity="center"
         android:layout_marginTop="5dp"
+        android:text="0"
+        android:inputType="number"
+        android:maxLines="1"
+
         />
 
     <TextView
@@ -57,17 +61,49 @@
 
         />
 
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginTop="50dp"
+    >
+
     <Button
-        android:id="@+id/otherFunction"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:text="Other Function"
-        android:layout_gravity="center"
-        android:textColor="#FFFFFF"
-        android:background="#fd2b3c"
-        android:layout_marginTop="30dp"
+        android:id="@+id/tenDollar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$10"
+        android:layout_weight="1"
+        />
+
+
+
+    <Button
+        android:id="@+id/fiftyDollar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$50"
+        android:layout_weight="1"
 
         />
+
+
+    <Button
+        android:id="@+id/hundredDollar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="$100"
+        android:layout_weight="1"
+        />
+
+</LinearLayout>
+
+    <Button
+        android:id="@+id/reset"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="Reset"/>
+
+
 
 
 </LinearLayout>

@@ -63,7 +63,6 @@ public class QR extends AppCompatActivity implements ZXingScannerView.ResultHand
                 != PackageManager.PERMISSION_GRANTED) {
 
 
-            Toast.makeText(this, "NO PERMISION", Toast.LENGTH_SHORT).show();
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
 
 

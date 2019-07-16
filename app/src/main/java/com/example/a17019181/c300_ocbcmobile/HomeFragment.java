@@ -30,9 +30,9 @@ public class HomeFragment extends Fragment {
     View myView;
     private ImageView atmLocator;
     private ImageView qrScanner;
+    private ImageView authentication;
     private TextView username;
     private TextView balance;
-
 
     private User post;
     private Bundle bundle;
@@ -106,7 +106,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        authentication = getActivity().findViewById(R.id.authentication);
 
+        authentication.setOnClickListener( (View v) -> startActivity(new Intent(getActivity(),QR.class)));
 
     }
 }

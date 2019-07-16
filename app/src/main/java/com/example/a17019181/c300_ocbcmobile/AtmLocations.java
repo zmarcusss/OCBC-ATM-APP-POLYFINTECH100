@@ -79,7 +79,6 @@ public class AtmLocations extends FragmentActivity implements OnMapReadyCallback
                 != PackageManager.PERMISSION_GRANTED) {
 
 
-            Toast.makeText(this, "NO PERMISION", Toast.LENGTH_SHORT).show();
             ActivityCompat.requestPermissions(this, permissions, 1);
 
 
@@ -113,7 +112,7 @@ public class AtmLocations extends FragmentActivity implements OnMapReadyCallback
                     if (task.isSuccessful()) {
                         Location currentLocation = (Location) task.getResult();
                         LatLng location = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
-                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 15f));
+                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 17f));
                         map.addMarker(new MarkerOptions().position(location));
 
 

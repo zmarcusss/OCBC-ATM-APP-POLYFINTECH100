@@ -1,5 +1,6 @@
 package com.example.a17019181.c300_ocbcmobile;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class SettingsFragment extends Fragment {
@@ -35,7 +38,6 @@ public class SettingsFragment extends Fragment {
     private Switch fingerprintSwitch;
     private static final String TAG = SettingsFragment.class.getName();
     private User post;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -57,13 +59,18 @@ public class SettingsFragment extends Fragment {
 
 
 
+
         if (bundle != null) {
             post = (User) bundle.getSerializable("user_key");
             if (!post.getAndroiduid().equals("")){
                 fingerprintSwitch.setChecked(true);
+
+
             }
 
         }
+
+
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
@@ -75,7 +82,6 @@ public class SettingsFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked){
 
-                    fingerprintSwitch.setChecked(false);
 
                     Executor newExecutor = Executors.newSingleThreadExecutor();
 
@@ -87,6 +93,13 @@ public class SettingsFragment extends Fragment {
                         public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                             super.onAuthenticationError(errorCode, errString);
                             if (errorCode == BiometricPrompt.ERROR_NEGATIVE_BUTTON) {
+                                Runnable runnable = () -> {
+                                    fingerprintSwitch.setChecked(false);
+                                };
+                                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                                executorService.submit(runnable);
+
+
                             } else {
                                 Log.d(TAG, "An unrecoverable error occurred");
                             }
@@ -106,7 +119,11 @@ public class SettingsFragment extends Fragment {
 
 
 
-                            Log.d(TAG, "Fingerprint recognised successfully "+android_id);
+                            SharedPreferences mPrefs = getActivity().getSharedPreferences("fingerprint_key", 0);
+                            SharedPreferences.Editor editor = mPrefs.edit();
+
+                            editor.putBoolean("hasFingerprint", ((!post.getAndroiduid().equals("")) ? true : false));
+                            editor.commit();
 
 
                         }
@@ -120,7 +137,6 @@ public class SettingsFragment extends Fragment {
 
 
                     });
-
                     final BiometricPrompt.PromptInfo promptInfo = new BiometricPrompt.PromptInfo.Builder()
                             .setTitle("Register your finger")
                             .setDescription("Confirm fingerprint to continue")
@@ -133,7 +149,18 @@ public class SettingsFragment extends Fragment {
 
                 }else{
 
+                    post.setAndroiduid("");
+                    databaseReference.setValue(post);
+
+                    SharedPreferences mPrefs = getActivity().getSharedPreferences("fingerprint_key", 0);
+                    SharedPreferences.Editor editor = mPrefs.edit();
+
+                    editor.putBoolean("hasFingerprint", ((!post.getAndroiduid().equals("")) ? true : false));
+                    editor.commit();
+
                 }
+
+
             }
         });
 

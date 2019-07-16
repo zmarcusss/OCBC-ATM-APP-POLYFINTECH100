@@ -1,10 +1,13 @@
 package com.example.a17019181.c300_ocbcmobile;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.a17019181.c300_ocbcmobile.Model.User;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +28,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class NavigationBar extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -44,14 +48,15 @@ public class NavigationBar extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), Chatbot.class);
+                startActivity(i);
+            }
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -95,8 +100,6 @@ public class NavigationBar extends AppCompatActivity
             // Handle the camera action
 
 
-
-
             user = FirebaseAuth.getInstance().getCurrentUser();
             uid = user.getUid();
             firebaseDatabase = FirebaseDatabase.getInstance();
@@ -114,7 +117,6 @@ public class NavigationBar extends AppCompatActivity
                     fragment.setArguments(bundle);
 
 
-
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.content_frame, fragment).addToBackStack(null).commitAllowingStateLoss();
 
@@ -126,9 +128,6 @@ public class NavigationBar extends AppCompatActivity
 
                 }
             });
-
-
-
 
 
         } else if (id == R.id.nav_home) {
@@ -178,6 +177,13 @@ public class NavigationBar extends AppCompatActivity
                 HomeFragment fragment = new HomeFragment();
                 fragment.setArguments(bundle);
 
+                SharedPreferences mPrefs = getSharedPreferences("fingerprint_key", 0);
+                SharedPreferences.Editor editor = mPrefs.edit();
+
+                editor.putBoolean("hasFingerprint", ((!post.getAndroiduid().equals("")) ? true : false));
+
+
+                editor.commit();
 
 
                 FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -191,8 +197,6 @@ public class NavigationBar extends AppCompatActivity
 
             }
         });
-
-
 
 
     }
