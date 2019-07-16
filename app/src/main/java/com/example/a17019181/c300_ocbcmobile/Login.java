@@ -80,7 +80,7 @@ public class Login extends AppCompatActivity {
         fingerprintBtn.setVisibility(hasFingerprint ? View.VISIBLE : View.INVISIBLE);
 
 
-        if (!preconfigure.equals("")) {
+        if (hasFingerprint && !preconfigure.equals("") ) {
             quickWithdraw.setVisibility(View.VISIBLE);
             quickWithdraw.setText("$" + preconfigure);
 
