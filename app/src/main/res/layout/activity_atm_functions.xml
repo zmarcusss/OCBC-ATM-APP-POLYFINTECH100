@@ -49,6 +49,49 @@
         />
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="25dp"
+        >
+
+        <Button
+            android:id="@+id/tenDollar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$10"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:background="#fd2b3c"
+            android:layout_marginRight="20dp"        />
+
+
+
+        <Button
+            android:id="@+id/fiftyDollar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$50"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:background="#fd2b3c"
+
+            />
+
+
+        <Button
+            android:id="@+id/hundredDollar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$100"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:background="#fd2b3c"
+            android:layout_marginLeft="20dp"
+            />
+
+    </LinearLayout>
+
     <Button
         android:id="@+id/withdrawBtn"
         android:layout_width="300dp"
@@ -61,48 +104,7 @@
 
         />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:layout_marginTop="50dp"
-    >
 
-    <Button
-        android:id="@+id/tenDollar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="$10"
-        android:layout_weight="1"
-        android:textColor="#FFFFFF"
-        android:background="#fd2b3c"
-android:layout_marginRight="20dp"        />
-
-
-
-    <Button
-        android:id="@+id/fiftyDollar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="$50"
-        android:layout_weight="1"
-        android:textColor="#FFFFFF"
-        android:background="#fd2b3c"
-
-        />
-
-
-    <Button
-        android:id="@+id/hundredDollar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="$100"
-        android:layout_weight="1"
-        android:textColor="#FFFFFF"
-        android:background="#fd2b3c"
-        android:layout_marginLeft="20dp"
-        />
-
-</LinearLayout>
 
     <Button
         android:id="@+id/reset"
