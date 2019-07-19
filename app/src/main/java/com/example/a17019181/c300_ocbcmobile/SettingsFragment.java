@@ -40,6 +40,8 @@ public class SettingsFragment extends Fragment {
 
 
     private Switch fingerprintSwitch;
+    private Switch showLastTransactionSwitch;
+
     private static final String TAG = SettingsFragment.class.getName();
     private User post;
     @Nullable
@@ -56,11 +58,25 @@ public class SettingsFragment extends Fragment {
         Bundle bundle = this.getArguments();
 
 
-
+        SharedPreferences mPrefs2 = getActivity().getSharedPreferences("showLastTransaction_key", 0);
+        boolean hasLastTransaction = mPrefs2.getBoolean("showLastTransaction", false);
 
 
         fingerprintSwitch = getActivity().findViewById(R.id.fingerprint_switch);
+        showLastTransactionSwitch = getActivity().findViewById(R.id.showLastTransaction);
+        showLastTransactionSwitch.setChecked(hasLastTransaction);
 
+        showLastTransactionSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences mPrefs = getActivity().getSharedPreferences("showLastTransaction_key", 0);
+                SharedPreferences.Editor editor = mPrefs.edit();
+
+                editor.putBoolean("showLastTransaction", isChecked);
+                editor.commit();
+
+            }
+        });
 
 
 

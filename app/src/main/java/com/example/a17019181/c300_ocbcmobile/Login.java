@@ -77,10 +77,14 @@ public class Login extends AppCompatActivity {
         boolean hasFingerprint = mPrefs1.getBoolean("hasFingerprint", false);
 
 
+        SharedPreferences mPrefs2 = getSharedPreferences("showLastTransaction_key", 0);
+        boolean hasLastTransaction = mPrefs2.getBoolean("showLastTransaction", false);
+
+
+
         fingerprintBtn.setVisibility(hasFingerprint ? View.VISIBLE : View.INVISIBLE);
 
-
-        if (hasFingerprint && !preconfigure.equals("") ) {
+        if (hasFingerprint && !preconfigure.equals("") && hasLastTransaction ) {
             quickWithdraw.setVisibility(View.VISIBLE);
             quickWithdraw.setText("$" + preconfigure);
 
