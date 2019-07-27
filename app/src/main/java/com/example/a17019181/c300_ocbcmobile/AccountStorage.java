@@ -7,6 +7,8 @@ import android.preference.PreferenceManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+//Done by: Alastair
+
 public class AccountStorage {
     private static final String PREF_USERID = "userid";
     private static final String TAG = "AccountStorage";

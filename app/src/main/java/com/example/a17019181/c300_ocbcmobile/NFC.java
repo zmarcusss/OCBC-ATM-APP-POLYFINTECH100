@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+//Done by: Alastair
+
+
 public class NFC extends AppCompatActivity {
 
     @Override

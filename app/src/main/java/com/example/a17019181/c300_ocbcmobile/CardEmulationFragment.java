@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+//Done by: Alastair
+
+
 public class CardEmulationFragment extends Fragment {
 
     public static final String TAG = "CardEmulationFragment";

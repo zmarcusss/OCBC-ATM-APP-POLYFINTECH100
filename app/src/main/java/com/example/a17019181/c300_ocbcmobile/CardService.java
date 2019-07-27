@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 import java.util.Arrays;
 
+//Done by: Alastair
+
+
 public class CardService extends HostApduService {
     private static final String TAG = "CardService";
     private static final String CARD_AID = "F222222222";

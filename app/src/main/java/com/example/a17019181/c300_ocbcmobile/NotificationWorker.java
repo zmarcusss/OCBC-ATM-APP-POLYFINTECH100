@@ -43,6 +43,9 @@ import static android.content.Context.NOTIFICATION_SERVICE;
 import static com.example.a17019181.c300_ocbcmobile.NotificationMethods.StartWorker;
 
 
+//Done by: Alastair
+
+
 public class NotificationWorker extends Worker {
     private static final String WORK_RESULT = "work_result";
     private static final String TAG = "Background";
