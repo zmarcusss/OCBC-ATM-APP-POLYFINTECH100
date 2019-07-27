@@ -7,7 +7,6 @@ import android.os.Bundle;
 import com.example.a17019181.c300_ocbcmobile.Model.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,7 +21,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
@@ -31,11 +29,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 
+import static com.example.a17019181.c300_ocbcmobile.NotificationMethods.StartWorker;
+
+
 //Done By: Marcus Chen ZiRui (17019181)
 
 
 public class NavigationBar extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, TimeOutUtil.TimeOutListener{
 
 
     private FirebaseDatabase firebaseDatabase;
@@ -51,7 +52,7 @@ public class NavigationBar extends AppCompatActivity
         setContentView(R.layout.activity_navbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        TimeOutUtil.startLogoutTimer(this, this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -72,6 +73,12 @@ public class NavigationBar extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         onHome();
+
+        //Retrieve configuration values from notification
+        onNewIntent(getIntent());
+
+        //Start notification
+        StartWorker();
 
 
     }
@@ -204,4 +211,22 @@ public class NavigationBar extends AppCompatActivity
 
 
     }
+
+    @Override
+    public void onUserInteraction() {
+        super.onUserInteraction();
+        TimeOutUtil.startLogoutTimer(this, this);
+    }
+
+
+    @Override
+    public void doLogout() {
+        FirebaseAuth.getInstance().signOut();
+        finish();
+        startActivity(new Intent(this, Login.class));
+
+    }
+
+
+
 }

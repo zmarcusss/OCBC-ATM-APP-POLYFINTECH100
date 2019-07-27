@@ -1,15 +1,22 @@
 package com.example.a17019181.c300_ocbcmobile;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.core.content.ContextCompat;
+
+import android.provider.Settings;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
@@ -76,6 +83,13 @@ public class AtmLocations extends FragmentActivity implements OnMapReadyCallback
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION};
 
+        LocationManager lm = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+        boolean gps_enabled = false;
+
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch(Exception ex) {}
+
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -87,8 +101,12 @@ public class AtmLocations extends FragmentActivity implements OnMapReadyCallback
 
 
         }else{
+            if(gps_enabled ) {
+                initMap();
+            }else{
+                Log.d("ASJDOIJD","hi");
+            }
 
-            initMap();
         }
 
 
@@ -113,9 +131,14 @@ public class AtmLocations extends FragmentActivity implements OnMapReadyCallback
                 public void onComplete(@NonNull Task task) {
                     if (task.isSuccessful()) {
                         Location currentLocation = (Location) task.getResult();
-                        LatLng location = new LatLng(currentLocation.getLatitude(),currentLocation.getLongitude());
-                        map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 17f));
-                        map.addMarker(new MarkerOptions().position(location));
+                        try {
+                            LatLng location = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(location, 17f));
+                            map.addMarker(new MarkerOptions().position(location));
+                        }catch(NullPointerException e){
+
+                        }
+
 
 
                     } else {
@@ -170,7 +193,7 @@ public class AtmLocations extends FragmentActivity implements OnMapReadyCallback
                                 MarkerOptions marker = new MarkerOptions()
                                         .position(location)
                                         .icon(BitmapDescriptorFactory.fromBitmap(customMarker))
-                                        .title("Atm")
+                                        .title(atm.getString("address"))
                                         ;
 
                                 map.addMarker(marker);

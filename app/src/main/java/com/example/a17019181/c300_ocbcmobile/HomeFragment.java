@@ -2,6 +2,7 @@ package com.example.a17019181.c300_ocbcmobile;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment {
     private ImageView authentication;
     private TextView username;
     private TextView balance;
+    private ImageView nfc;
 
     private User post;
     private Bundle bundle;
@@ -47,18 +49,12 @@ public class HomeFragment extends Fragment {
         getActivity().setTitle("Home");
 
 
-
-
-
-
-
         return myView;
     }
 
 
-    public void onStart(){
+    public void onStart() {
         super.onStart();
-
 
 
     }
@@ -76,12 +72,8 @@ public class HomeFragment extends Fragment {
         if (bundle != null) {
             post = (User) bundle.getSerializable("user_key");
             username.setText(post.getUsername());
-            balance.setText(String.format("$%.2f",post.getBalance()));
+            balance.setText(String.format("$%.2f", post.getBalance()));
         }
-
-
-
-
 
 
         atmLocator = getActivity().findViewById(R.id.atm_locator);
@@ -89,7 +81,7 @@ public class HomeFragment extends Fragment {
         atmLocator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(),AtmLocations.class));
+                startActivity(new Intent(getActivity(), AtmLocations.class));
             }
         });
 
@@ -100,9 +92,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
 
 
-                Intent intent= new Intent(getActivity() ,AtmFunctions.class);
+                Intent intent = new Intent(getActivity(), AtmFunctions.class);
 
-                intent.putExtra("balance", post.getBalance()+"");
+                intent.putExtra("balance", post.getBalance() + "");
 
                 startActivity(intent);
             }
@@ -110,7 +102,11 @@ public class HomeFragment extends Fragment {
 
         authentication = getActivity().findViewById(R.id.authentication);
 
-        authentication.setOnClickListener( (View v) -> startActivity(new Intent(getActivity(),QR.class)));
+        authentication.setOnClickListener((View v) -> startActivity(new Intent(getActivity(), QR.class)));
+
+        nfc = getActivity().findViewById(R.id.nfc_authentication);
+
+        nfc.setOnClickListener((View v) -> startActivity(new Intent(getActivity(), NFC.class)));
 
     }
 }

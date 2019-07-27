@@ -14,6 +14,7 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private double frequent;
+    private Object configuration;
 
     public String getAccountType() {
         return accountType;
@@ -95,4 +96,11 @@ public class User implements Serializable {
         this.username = username;
     }
 
+    public Object getConfiguration() {
+        return configuration;
+    }
+
+    public void setConfiguration(Object configuration) {
+        this.configuration = configuration;
+    }
 }

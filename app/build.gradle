@@ -84,6 +84,10 @@ dependencies {
 
     implementation 'com.android.support:multidex:1.0.3'
 
+    //Alaistair
+    implementation "android.arch.work:work-runtime:1.0.0"
+
+
 
 
 }
