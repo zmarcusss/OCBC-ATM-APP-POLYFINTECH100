@@ -1,4 +1,5 @@
-Made a prototype for POLYFINTECH100 API Hackathon, Republic Polytechnic
+Made a rough prototype for POLYFINTECH100 API Hackathon with my team.
+
 
 ![image](https://github.com/zmarcusss/OCBC-ATM-Locator-Google-Map-Api/assets/50321028/d3d7df61-540c-4433-8bc0-e1abe7a266ca)
 Function - Card-less Authenticator
